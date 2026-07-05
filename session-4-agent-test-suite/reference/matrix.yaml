@@ -1,0 +1,1739 @@
+# Point-in-time copy of session-3-traceability/data/matrix.yaml, as
+# accepted in Session 3's review. Used only to plan/verify this session's
+# test coverage — not a live dependency. Re-sync manually if the real
+# matrix changes.
+
+# Generated exhaustively from six effective source documents.
+- requirement_id: playbook.role.judgment_rules_only
+  source_document: agent-judgment-playbook.md
+  source_locator: Opening paragraphs
+  statement: The agent instruction set contains judgment rules only and does not own sequencing, state, file management, or
+    gating decisions.
+  classification: JUDGMENT
+  classification_rationale: Whether the agent stayed within judgment-only scope requires qualitative review of behavior, not
+    a schema assertion.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.role.exact_matching_io_contract_schema
+  source_document: agent-judgment-playbook.md
+  source_locator: Opening paragraphs
+  statement: The agent returns exactly the schema in the matching I/O contract with no extra top-level fields and none omitted.
+  classification: STRUCTURAL
+  classification_rationale: Top-level field presence and absence are checked against a fixture payload.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.role.single_task_per_invocation
+  source_document: agent-judgment-playbook.md
+  source_locator: Opening paragraphs
+  statement: 'Each invocation performs exactly one named task: EVALUATE or APPLY, as indicated by the input payload.'
+  classification: STRUCTURAL
+  classification_rationale: The input task field and returned contract shape are equality-checked per invocation.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.hard_constraint.no_breaking_changes
+  source_document: agent-judgment-playbook.md
+  source_locator: Hard Constraints > No breaking changes
+  statement: An applied edit must not invalidate any cross-reference, listing number, or claim elsewhere in the chapter.
+  classification: JUDGMENT
+  classification_rationale: Detecting an invalidated cross-reference requires reading the chapter's other claims, not a schema
+    check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.hard_constraint.no_major_structural_changes
+  source_document: agent-judgment-playbook.md
+  source_locator: Hard Constraints > No major structural changes
+  statement: An applied edit must not reorder, add, or remove sections or headings.
+  classification: JUDGMENT
+  classification_rationale: Detecting section reordering or heading changes requires structural comparison of document outline,
+    not a single-field check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.hard_constraint.no_section_dilution
+  source_document: agent-judgment-playbook.md
+  source_locator: Hard Constraints > No section dilution
+  statement: Protected callouts, core teaching passages, and unique examples must not lose content beyond allowed repetition
+    trimming.
+  classification: JUDGMENT
+  classification_rationale: Whether protected content was diluted requires comparing passage substance, not schema shape.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.hard_constraint.no_code_listing_changes
+  source_document: agent-judgment-playbook.md
+  source_locator: Hard Constraints > No code listing changes
+  statement: A comment whose only fix requires touching a code block is DO_NOT_APPLY with reason requires_code_change.
+  classification: STRUCTURAL
+  classification_rationale: Given a fixture comment tagged as code-only, the output recommendation/reason pair is a fixed
+    expected value — pure equality check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.hard_constraint.purely_editorial
+  source_document: agent-judgment-playbook.md
+  source_locator: Hard Constraints > Purely editorial
+  statement: Every applied edit must be classifiable as a wording, precision, or factual-accuracy correction at the sentence
+    or clause level.
+  classification: JUDGMENT
+  classification_rationale: Classifying an edit as purely editorial requires qualitative reading of the change, not a structural
+    assertion.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.hard_constraint.evaluate_rejection_out_of_scope
+  source_document: agent-judgment-playbook.md
+  source_locator: Hard Constraints (intro paragraph)
+  statement: On EVALUATE, a hard-constraint-failing comment receives recommendation DO_NOT_APPLY with reason out_of_scope.
+  classification: STRUCTURAL
+  classification_rationale: Fixed recommendation/reason pair for hard-constraint rejections is an equality check on fixture
+    output.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.hard_constraint.evaluate_skips_checklist
+  source_document: agent-judgment-playbook.md
+  source_locator: Hard Constraints (intro paragraph)
+  statement: Hard-constraint-failing comments do not go through the seven-question checklist.
+  classification: STRUCTURAL
+  classification_rationale: Absence of checklist-derived fields or routing to hard_constraint_rejections is verifiable from
+    fixture output structure.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.hard_constraint.code_only_prose_mitigation_note
+  source_document: agent-judgment-playbook.md
+  source_locator: Hard Constraints > No code listing changes
+  statement: When a code-only comment has a real underlying concern, the agent states what minimal prose-only mitigation exists,
+    if any.
+  classification: JUDGMENT
+  classification_rationale: Assessing whether a stated prose mitigation is adequate requires reading comprehension.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.hard_constraint.apply_self_check_before_return
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY, step 5'
+  statement: On APPLY, the agent self-checks output against all Hard Constraints before returning.
+  classification: STRUCTURAL
+  classification_rationale: Presence of the hard_constraint_self_check boolean block in APPLY output is a schema check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.hard_constraints_checked_first
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 1'
+  statement: Hard Constraints are checked before any other evaluation logic for each comment.
+  classification: STRUCTURAL
+  classification_rationale: Ordering is verifiable when a fixture comment fails hard constraints without checklist artifacts.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.hard_constraint_hit_one_sentence_note
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 1'
+  statement: A hard-constraint rejection includes a one-sentence note identifying which constraint was hit.
+  classification: JUDGMENT
+  classification_rationale: Whether the note correctly identifies the constraint requires reading the note text.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.seven_question_checklist_for_in_scope
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 2'
+  statement: In-scope comments are evaluated using the seven-question checklist to inform the write-up.
+  classification: JUDGMENT
+  classification_rationale: Whether the checklist was applied with sound reasoning is a qualitative judgment.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.checklist_structural_break_disagreement
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 2 (first bullet)'
+  statement: If the structural-break checklist answer disagrees with step 1's hard-constraint filter, that disagreement is
+    surfaced.
+  classification: JUDGMENT
+  classification_rationale: Detecting and correctly surfacing a checklist/filter disagreement requires reading the write-up.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.seven_dimensions_always_written
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 3'
+  statement: Every comment's write-up includes all seven listed fields regardless of the checklist outcome.
+  classification: STRUCTURAL
+  classification_rationale: Field presence on every item is a schema check against a fixture batch.
+  covering_test_scenario_ids: []
+  notes: See session-2-dependency-contract spec.md Q5 — playbook's own bullet list under this step has 8 entries, not 7, if
+    'reason' is counted separately from 'recommendation.' Flag, don't silently pick one reading.
+- requirement_id: playbook.evaluate.priority_field_present
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 3 > priority'
+  statement: Every evaluated comment item includes a priority field.
+  classification: STRUCTURAL
+  classification_rationale: Field presence on every item is a schema check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.priority_enum_values
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 3 > priority'
+  statement: priority is one of CRITICAL, HIGH, MEDIUM, or LOW.
+  classification: STRUCTURAL
+  classification_rationale: Enum membership is an equality check against allowed literals.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.signal_to_noise_impact_present
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 3 > signal_to_noise_impact'
+  statement: Every evaluated comment item includes signal_to_noise_impact.
+  classification: STRUCTURAL
+  classification_rationale: Field presence is a schema check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.essence_risk_present
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 3 > essence_risk'
+  statement: Every evaluated comment item includes essence_risk.
+  classification: STRUCTURAL
+  classification_rationale: Field presence is a schema check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.verbosity_impact_present
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 3 > verbosity_impact'
+  statement: Every evaluated comment item includes verbosity_impact.
+  classification: STRUCTURAL
+  classification_rationale: Field presence is a schema check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.readability_impact_present
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 3 > readability_impact'
+  statement: Every evaluated comment item includes readability_impact.
+  classification: STRUCTURAL
+  classification_rationale: Field presence is a schema check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.repetition_impact_present
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 3 > repetition_impact'
+  statement: Every evaluated comment item includes repetition_impact.
+  classification: STRUCTURAL
+  classification_rationale: Field presence is a schema check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.recommendation_field_present
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 3 > recommendation'
+  statement: Every evaluated comment item includes recommendation.
+  classification: STRUCTURAL
+  classification_rationale: Field presence is a schema check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.recommendation_enum_values
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 3 > recommendation'
+  statement: recommendation is one of APPLY, APPLY_SELECTIVELY, APPLY_WITH_CARE, RESOLVED_AS_SIDE_EFFECT, or DO_NOT_APPLY.
+  classification: STRUCTURAL
+  classification_rationale: Enum membership is an equality check against allowed literals.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.reason_field_present
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 3 > reason'
+  statement: Every evaluated comment item includes reason.
+  classification: STRUCTURAL
+  classification_rationale: Field presence is a schema check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.reason_convergence_framed_for_non_apply
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 3 > reason'
+  statement: For every non-APPLY verdict, reason is convergence-framed and explains why leaving the issue unresolved does
+    not block finalizing the chapter.
+  classification: JUDGMENT
+  classification_rationale: Whether a reason is genuinely convergence-framed requires reading comprehension, not a keyword
+    check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.overwrought_fix_stated_in_reason
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 4'
+  statement: When a comment's diagnosis is correct but its proposed fix is overwrought or violates style rules, the item's
+    reason states this explicitly.
+  classification: JUDGMENT
+  classification_rationale: Detecting overwrought fixes and explicit acknowledgment requires qualitative reading.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.minimal_corrected_version_proposed
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 4'
+  statement: When a comment's proposed fix is overwrought or disproportionate, the agent proposes the minimal corrected version
+    instead.
+  classification: JUDGMENT
+  classification_rationale: Whether the proposed correction is truly minimal requires expert judgment.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.no_blind_import_of_comment_wording
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 4'
+  statement: The agent does not import a review comment's exact wording just because the diagnosis was right.
+  classification: JUDGMENT
+  classification_rationale: Whether wording was blindly imported requires comparing output to the original comment.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.cross_check_replacement_against_style
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 4'
+  statement: Comment-supplied replacement sentences are cross-checked against supplied style rules before being treated as
+    ready to apply.
+  classification: JUDGMENT
+  classification_rationale: Style-rule compliance of proposed text requires qualitative assessment.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.protected_material_flagged
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 5'
+  statement: Items touching protected material supplied in input as protected_passages are explicitly flagged.
+  classification: JUDGMENT
+  classification_rationale: Whether protected material was correctly identified and flagged requires reading item content
+    against anchors.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.protected_override_technical_error_only
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 5'
+  statement: Protected material is overridden only for genuine technical errors, never for style preferences.
+  classification: JUDGMENT
+  classification_rationale: Distinguishing technical error from style preference on protected passages is a judgment call.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.independent_defect_category_scan
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 6'
+  statement: The agent scans chapter text against the full supplied defect-category list independently of supplied comments.
+  classification: JUDGMENT
+  classification_rationale: Whether the scan covered all categories and found real defects requires expert review of findings.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.agent_identified_origin_tag
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 6'
+  statement: Agent-emitted findings use origin agent_identified, distinct from supplied_review comment-derived items.
+  classification: STRUCTURAL
+  classification_rationale: The origin field value is an equality check on fixture output.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.convergence_computed_from_prior_rounds
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 7'
+  statement: convergence_assessment compares this round's item count and severity mix to prior_rounds_summary from input.
+  classification: STRUCTURAL
+  classification_rationale: Using prior_rounds_summary fields in output comparison is verifiable from paired input/output
+    fixtures.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.convergence_is_factual_not_a_recommendation
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE, step 7'
+  statement: convergence_assessment.comparison_note states scope trend factually and never recommends stopping or continuing.
+  classification: JUDGMENT
+  classification_rationale: Whether a sentence 'recommends stopping' vs. 'states a fact' is a reading-comprehension judgment,
+    not a keyword check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.return_evaluate_contract_only
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE (closing)'
+  statement: EVALUATE returns only the structured object defined in io-contract-evaluate.md with no prose outside that structure.
+  classification: STRUCTURAL
+  classification_rationale: Output conforms to the contract top-level keys with no extra prose fields.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.evaluate.no_apply_decision
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: EVALUATE (closing)'
+  statement: The EVALUATE agent does not decide whether to proceed to APPLY.
+  classification: JUDGMENT
+  classification_rationale: Whether the agent overstepped into gating decisions requires reviewing behavior holistically.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.rejects_do_not_apply_as_input_error
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY (intro)'
+  statement: If a DO_NOT_APPLY item is received for application, the agent treats it as an input error rather than applying
+    it.
+  classification: STRUCTURAL
+  classification_rationale: Reporting in input_errors rather than mutating chapter text is a structural output check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.smallest_sentence_clause_edit
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY, step 1'
+  statement: Each approved item is resolved with the smallest edit that fully resolves it — a sentence or clause, never a
+    section rewrite.
+  classification: JUDGMENT
+  classification_rationale: Whether an edit is the smallest sufficient change requires qualitative comparison of before/after
+    text.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.restructure_flags_input_error
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY, step 1'
+  statement: If an approved item cannot be resolved without restructuring, the agent flags an input error instead of restructuring.
+  classification: STRUCTURAL
+  classification_rationale: Presence of an input_errors entry without section-level restructuring is verifiable from fixture
+    output.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.selective_uses_evaluate_narrower_version
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY, step 2'
+  statement: APPLY_SELECTIVELY items apply the narrower corrected version from the item's EVALUATE reason, not the review
+    comment's fuller text.
+  classification: JUDGMENT
+  classification_rationale: Whether the applied text matches the narrower EVALUATE-specified version requires reading both
+    texts.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.scope_limited_to_approved_items
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY, step 3'
+  statement: The agent does not edit content outside the scope of approved items.
+  classification: JUDGMENT
+  classification_rationale: Detecting out-of-scope edits requires diff review beyond schema checks.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.protected_untouched_unless_required
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY, step 3'
+  statement: Protected material is not touched unless a specific approved item requires it.
+  classification: JUDGMENT
+  classification_rationale: Whether protected passages were improperly edited requires content comparison.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.closing_bridge_when_summary_touched
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY, step 4'
+  statement: When next_chapter_context is supplied and an approved item touches the Summary, the Summary ends with a forward-pointing
+    closing bridge.
+  classification: JUDGMENT
+  classification_rationale: Whether a closing bridge was appropriately added requires reading the edited Summary.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.closing_bridge_names_concept_not_chapter
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY, step 4'
+  statement: The closing bridge names the concept this chapter established and poses the question the next chapter resolves.
+  classification: JUDGMENT
+  classification_rationale: Whether the bridge correctly names the concept requires qualitative reading.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.closing_bridge_no_chapter_number
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY, step 4'
+  statement: The closing bridge never uses a chapter number.
+  classification: STRUCTURAL
+  classification_rationale: Absence of chapter-number patterns in the bridge sentence is a regex or token check on fixture
+    text.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.closing_bridge_no_next_chapter_phrasing
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY, step 4'
+  statement: The closing bridge never uses 'the next chapter covers...' phrasing.
+  classification: STRUCTURAL
+  classification_rationale: Forbidden phrase absence is a string check against fixture output.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.closing_bridge_checked_against_style_rules
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY, step 4'
+  statement: The closing bridge sentence is checked against supplied style rules before finalization.
+  classification: JUDGMENT
+  classification_rationale: Style-rule compliance of the bridge requires qualitative assessment.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.hard_constraint_boolean_self_check_block
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY, step 5'
+  statement: Hard-constraint self-check is reported as a structured boolean block, not prose aside.
+  classification: STRUCTURAL
+  classification_rationale: Presence of hard_constraint_self_check with boolean sub-fields is a schema check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.change_log_per_approved_item
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY, step 6'
+  statement: The APPLY output includes, for every approved item, where it landed in the text.
+  classification: STRUCTURAL
+  classification_rationale: change_log entries per approved item_id are countable against fixture input.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.deviation_account_when_wording_differs
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY, step 6'
+  statement: When applied text deviates from the review's literal suggested wording, a plain-language account explains why.
+  classification: JUDGMENT
+  classification_rationale: Whether the deviation explanation is adequate requires reading comprehension.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.return_apply_contract_only
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY (closing)'
+  statement: APPLY returns only the structured object defined in io-contract-apply.md.
+  classification: STRUCTURAL
+  classification_rationale: Output conforms to the contract top-level keys.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: playbook.apply.no_pass_or_filesystem_control
+  source_document: agent-judgment-playbook.md
+  source_locator: 'Task: APPLY (closing)'
+  statement: The APPLY agent does not decide pass number, subsequent rounds, or filesystem persistence.
+  classification: JUDGMENT
+  classification_rationale: Whether the agent overstepped into orchestration concerns requires behavioral review.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.task_is_evaluate
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > task
+  statement: EVALUATE input task is the literal string EVALUATE.
+  classification: STRUCTURAL
+  classification_rationale: Single-field equality check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.chapter_id_present
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > chapter_id
+  statement: EVALUATE input includes chapter_id.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.pass_number_present
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > pass_number
+  statement: EVALUATE input includes pass_number.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.max_passes_present
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > max_passes
+  statement: EVALUATE input includes max_passes.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.chapter_text_present
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > chapter_text
+  statement: EVALUATE input includes chapter_text as the full current chapter markdown.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.review_comments_array
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > review_comments
+  statement: EVALUATE input includes review_comments as an array of comment objects.
+  classification: STRUCTURAL
+  classification_rationale: Array presence and shape check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.review_comments_may_be_empty
+  source_document: io-contract-evaluate.md
+  source_locator: Notes on fields > review_comments
+  statement: review_comments may be an empty array for a defect-category-only scan.
+  classification: STRUCTURAL
+  classification_rationale: Empty-array acceptance is verifiable with a fixture input.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.review_comment_id_and_text
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > review_comments[]
+  statement: Each review comment includes comment_id and verbatim text.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.governing_excerpts_present
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > governing_excerpts
+  statement: EVALUATE input includes governing_excerpts.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.governing_excerpts_defect_categories
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > governing_excerpts.defect_categories
+  statement: governing_excerpts includes defect_categories as a verbatim list.
+  classification: STRUCTURAL
+  classification_rationale: Nested field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.governing_excerpts_seven_question_checklist
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > governing_excerpts.seven_question_checklist
+  statement: governing_excerpts includes seven_question_checklist verbatim from the addendum.
+  classification: STRUCTURAL
+  classification_rationale: Nested field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.governing_excerpts_style_rules
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > governing_excerpts.style_rules
+  statement: governing_excerpts includes style_rules excerpts.
+  classification: STRUCTURAL
+  classification_rationale: Nested field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.governing_excerpts_protected_passages
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > governing_excerpts.protected_passages
+  statement: governing_excerpts includes protected_passages with name and text_anchor per entry.
+  classification: STRUCTURAL
+  classification_rationale: Nested array shape check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.next_chapter_context_nullable
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > next_chapter_context
+  statement: next_chapter_context is a string or null.
+  classification: STRUCTURAL
+  classification_rationale: Nullability/type check on fixture input.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.next_chapter_context_null_no_bridge
+  source_document: io-contract-evaluate.md
+  source_locator: Notes on fields > next_chapter_context
+  statement: When next_chapter_context is null for the final chapter, the agent must not fabricate a closing bridge.
+  classification: JUDGMENT
+  classification_rationale: Whether a bridge was improperly fabricated requires reading APPLY/EVALUATE behavior.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.prior_rounds_summary_empty_on_pass_one
+  source_document: io-contract-evaluate.md
+  source_locator: Notes on fields > prior_rounds_summary
+  statement: prior_rounds_summary is an empty array on pass 1.
+  classification: STRUCTURAL
+  classification_rationale: Array length check on pass-1 fixture input.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.prior_rounds_summary_entry_shape
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > prior_rounds_summary[]
+  statement: Each prior_rounds_summary entry includes pass_number, item_count, severity_mix, applied_count, and do_not_apply_count.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check on fixture input assembled by orchestrator.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.direct_instructions_array
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > direct_instructions
+  statement: EVALUATE input includes direct_instructions as an array.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.input.direct_instructions_id_and_text
+  source_document: io-contract-evaluate.md
+  source_locator: Input schema > direct_instructions[]
+  statement: Each direct instruction includes instruction_id and text.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.items_array
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items
+  statement: EVALUATE output includes an items array.
+  classification: STRUCTURAL
+  classification_rationale: Top-level field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.item_id_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items[].item_id
+  statement: Every items entry includes item_id.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.item_origin_supplied_review
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items[].origin
+  statement: Comment-derived items have origin supplied_review.
+  classification: STRUCTURAL
+  classification_rationale: Enum/value equality check per item.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.item_priority_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items[].priority
+  statement: Every items entry includes priority.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.item_priority_enum
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items[].priority
+  statement: priority is CRITICAL, HIGH, MEDIUM, or LOW.
+  classification: STRUCTURAL
+  classification_rationale: Enum membership check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.signal_to_noise_impact_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items[].signal_to_noise_impact
+  statement: Every items entry includes signal_to_noise_impact.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.essence_risk_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items[].essence_risk
+  statement: Every items entry includes essence_risk.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.verbosity_impact_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items[].verbosity_impact
+  statement: Every items entry includes verbosity_impact.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.readability_impact_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items[].readability_impact
+  statement: Every items entry includes readability_impact.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.repetition_impact_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items[].repetition_impact
+  statement: Every items entry includes repetition_impact.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.recommendation_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items[].recommendation
+  statement: Every items entry includes recommendation.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.recommendation_enum_values
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items[].recommendation
+  statement: recommendation is APPLY, APPLY_SELECTIVELY, APPLY_WITH_CARE, or DO_NOT_APPLY for supplied_review items in the
+    base schema example.
+  classification: STRUCTURAL
+  classification_rationale: Enum membership check against allowed literals.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.reason_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items[].reason
+  statement: Every items entry includes reason.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.reason_convergence_framed_when_not_apply
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items[].reason (inline comment)
+  statement: reason is convergence-framed when recommendation is not APPLY.
+  classification: JUDGMENT
+  classification_rationale: Whether reason text is convergence-framed requires reading comprehension.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.minimal_corrected_text_field_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items[].minimal_corrected_text
+  statement: Every supplied_review item includes minimal_corrected_text (present, not omitted).
+  classification: STRUCTURAL
+  classification_rationale: Field presence on every array entry is a schema check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.minimal_corrected_text_nullability_matches_recommendation
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > items[].minimal_corrected_text (inline comment)
+  statement: minimal_corrected_text is non-null when recommendation is APPLY / APPLY_SELECTIVELY / APPLY_WITH_CARE, and null
+    otherwise.
+  classification: STRUCTURAL
+  classification_rationale: Conditional nullability check against fixture output.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.hard_constraint_rejections_array
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > hard_constraint_rejections
+  statement: EVALUATE output includes hard_constraint_rejections array.
+  classification: STRUCTURAL
+  classification_rationale: Top-level field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.rejection_item_id_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > hard_constraint_rejections[].item_id
+  statement: Every hard_constraint_rejections entry includes item_id.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.rejection_constraint_hit_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > hard_constraint_rejections[].constraint_hit
+  statement: Every hard_constraint_rejections entry includes constraint_hit.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.rejection_note_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > hard_constraint_rejections[].note
+  statement: Every hard_constraint_rejections entry includes note.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.hard_constraint_rejection_skips_checklist
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > hard_constraint_rejections
+  statement: An item appearing in hard_constraint_rejections must not also appear in items with a non-DO_NOT_APPLY recommendation.
+  classification: STRUCTURAL
+  classification_rationale: Cross-array consistency check against a fixture output — pure logic, no reading required.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.agent_identified_findings_array
+  source_document: io-contract-evaluate.md (as amended by io-contract-evaluate-ammendum.md)
+  source_locator: Output schema > agent_identified_findings
+  statement: EVALUATE output includes agent_identified_findings array.
+  classification: STRUCTURAL
+  classification_rationale: Top-level field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.agent_identified_item_id_present
+  source_document: io-contract-evaluate.md (as amended by io-contract-evaluate-ammendum.md)
+  source_locator: Output schema > agent_identified_findings[].item_id
+  statement: Every agent_identified_findings entry includes item_id.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.agent_identified_origin_value
+  source_document: io-contract-evaluate.md (as amended by io-contract-evaluate-ammendum.md)
+  source_locator: Output schema > agent_identified_findings[].origin
+  statement: Every agent_identified_findings entry has origin agent_identified.
+  classification: STRUCTURAL
+  classification_rationale: Value equality check per entry.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.agent_identified_defect_category_present
+  source_document: io-contract-evaluate.md (as amended by io-contract-evaluate-ammendum.md)
+  source_locator: Output schema > agent_identified_findings[].defect_category
+  statement: Every agent_identified_findings entry includes defect_category.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.agent_identified_defect_category_matches_supplied
+  source_document: io-contract-evaluate.md (as amended by io-contract-evaluate-ammendum.md)
+  source_locator: Output schema > agent_identified_findings[].defect_category (inline comment)
+  statement: defect_category matches one of the ten supplied categories from input.
+  classification: STRUCTURAL
+  classification_rationale: Membership check against the supplied category list.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.agent_identified_priority_present
+  source_document: io-contract-evaluate.md (as amended by io-contract-evaluate-ammendum.md)
+  source_locator: Output schema > agent_identified_findings[].priority
+  statement: Every agent_identified_findings entry includes priority.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.agent_identified_recommendation_present
+  source_document: io-contract-evaluate.md (as amended by io-contract-evaluate-ammendum.md)
+  source_locator: Output schema > agent_identified_findings[].recommendation
+  statement: Every agent_identified_findings entry includes recommendation.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.agent_identified_reason_present
+  source_document: io-contract-evaluate.md (as amended by io-contract-evaluate-ammendum.md)
+  source_locator: Output schema > agent_identified_findings[].reason
+  statement: Every agent_identified_findings entry includes reason.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.agent_identified_finding_has_corrected_text_field
+  source_document: io-contract-evaluate.md (as amended by io-contract-evaluate-ammendum.md)
+  source_locator: Amendment 1 > Change
+  statement: Every entry in agent_identified_findings includes a minimal_corrected_text field (present, not merely optional-by-omission).
+  classification: STRUCTURAL
+  classification_rationale: Field presence on every array entry is a schema check against a fixture EVALUATE output.
+  covering_test_scenario_ids: []
+  notes: Field did not exist pre-Amendment-1; any fixture/test built before this amendment is now stale and must be re-checked,
+    not assumed still valid.
+- requirement_id: io_evaluate.output.agent_identified_finding_corrected_text_nullability_matches_recommendation
+  source_document: io-contract-evaluate.md (as amended by io-contract-evaluate-ammendum.md)
+  source_locator: Amendment 1 > Change (inline schema comment)
+  statement: minimal_corrected_text is non-null when recommendation is APPLY / APPLY_SELECTIVELY / APPLY_WITH_CARE, and null
+    otherwise (e.g. for DO_NOT_APPLY-recommended agent-identified findings).
+  classification: STRUCTURAL
+  classification_rationale: A direct conditional check (recommendation value implies non-null/null) against fixture output
+    — no reading comprehension needed.
+  covering_test_scenario_ids: []
+  notes: Mirrors the existing supplied_review item rule for minimal_corrected_text (io-contract-evaluate.md, Output schema
+    > items) — worth a cross-reference entry confirming both rules use the same nullability logic, since the amendment's rationale
+    explicitly says this was modeled on that existing field.
+- requirement_id: io_evaluate.output.supplied_and_agent_identified_corrected_text_same_nullability
+  source_document: io-contract-evaluate.md (as amended by io-contract-evaluate-ammendum.md)
+  source_locator: Amendment 1 > Rationale
+  statement: minimal_corrected_text nullability rules for agent_identified_findings mirror those for supplied_review items.
+  classification: STRUCTURAL
+  classification_rationale: Same conditional nullability predicate applied to both arrays in a fixture output.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: meta.amendment_1_supersedes_base_contract_for_agent_identified_findings
+  source_document: io-contract-evaluate-ammendum.md
+  source_locator: Compatibility note
+  statement: Any code path that constructs or consumes agent_identified_findings for an APPLY-recommended item must handle
+    minimal_corrected_text; DO_NOT_APPLY-recommended findings are unaffected by this amendment.
+  classification: STRUCTURAL
+  classification_rationale: A fixture pair (pre-amendment-shaped DO_NOT_APPLY finding vs. amended-shape APPLY finding) settles
+    this without judgment.
+  covering_test_scenario_ids: []
+  notes: This entry exists specifically so a future re-scan of io-contract-evaluate.md alone (without checking for amendments)
+    doesn't silently regenerate a matrix missing this field — the exact failure mode Session 2 was built to catch, applied
+    here to this project's own upstream contracts.
+- requirement_id: io_evaluate.output.convergence_assessment_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > convergence_assessment
+  statement: EVALUATE output includes convergence_assessment.
+  classification: STRUCTURAL
+  classification_rationale: Top-level field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.scope_trend_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > convergence_assessment.scope_trend
+  statement: convergence_assessment includes scope_trend.
+  classification: STRUCTURAL
+  classification_rationale: Nested field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.scope_trend_enum_values
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > convergence_assessment.scope_trend
+  statement: scope_trend is one of shrinking, flat, growing, or baseline_round_1.
+  classification: STRUCTURAL
+  classification_rationale: Enum membership check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.comparison_note_present
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > convergence_assessment.comparison_note
+  statement: convergence_assessment includes comparison_note.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_evaluate.output.comparison_note_no_stop_continue_recommendation
+  source_document: io-contract-evaluate.md
+  source_locator: Output schema > convergence_assessment.comparison_note (inline comment)
+  statement: comparison_note is a factual comparison with no recommendation to stop or continue.
+  classification: JUDGMENT
+  classification_rationale: Whether text recommends stopping vs. states facts requires reading comprehension.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.input.task_is_apply
+  source_document: io-contract-apply.md
+  source_locator: Input schema > task
+  statement: APPLY input task is the literal string APPLY.
+  classification: STRUCTURAL
+  classification_rationale: Single-field equality check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.input.chapter_id_present
+  source_document: io-contract-apply.md
+  source_locator: Input schema > chapter_id
+  statement: APPLY input includes chapter_id.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.input.pass_number_present
+  source_document: io-contract-apply.md
+  source_locator: Input schema > pass_number
+  statement: APPLY input includes pass_number.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.input.chapter_text_present
+  source_document: io-contract-apply.md
+  source_locator: Input schema > chapter_text
+  statement: APPLY input includes chapter_text as the exact current working copy string.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.input.chapter_text_fresh_each_call
+  source_document: io-contract-apply.md
+  source_locator: Notes > chapter_text
+  statement: The agent never assumes chapter_text still matches an earlier view and never re-fetches it.
+  classification: JUDGMENT
+  classification_rationale: Whether the agent improperly cached prior chapter state requires behavioral review.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.input.approved_items_array
+  source_document: io-contract-apply.md
+  source_locator: Input schema > approved_items
+  statement: APPLY input includes approved_items array.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.input.approved_item_id_present
+  source_document: io-contract-apply.md
+  source_locator: Input schema > approved_items[].item_id
+  statement: Every approved_items entry includes item_id.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.input.approved_item_recommendation_present
+  source_document: io-contract-apply.md
+  source_locator: Input schema > approved_items[].recommendation
+  statement: Every approved_items entry includes recommendation.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.input.approved_item_minimal_corrected_text_present
+  source_document: io-contract-apply.md
+  source_locator: Input schema > approved_items[].minimal_corrected_text
+  statement: Every approved_items entry includes minimal_corrected_text from the prior EVALUATE response.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.input.direct_instructions_array
+  source_document: io-contract-apply.md
+  source_locator: Input schema > direct_instructions
+  statement: APPLY input includes direct_instructions array.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.input.direct_instruction_action_field
+  source_document: io-contract-apply.md
+  source_locator: Input schema > direct_instructions[].action
+  statement: Each APPLY direct instruction includes an action field (e.g. apply_verbatim).
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.input.next_chapter_context
+  source_document: io-contract-apply.md
+  source_locator: Input schema > next_chapter_context
+  statement: APPLY input includes next_chapter_context (string or null), same as EVALUATE input.
+  classification: STRUCTURAL
+  classification_rationale: Field presence and nullability check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.input.invalid_recommendation_reported_in_input_errors
+  source_document: io-contract-apply.md
+  source_locator: Notes > approved_items
+  statement: If an approved_items entry has a recommendation other than APPLY / APPLY_SELECTIVELY / APPLY_WITH_CARE, the agent
+    reports it in input_errors rather than acting on it.
+  classification: STRUCTURAL
+  classification_rationale: input_errors population for invalid recommendation is a structural output check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.revised_chapter_text_present
+  source_document: io-contract-apply.md
+  source_locator: Output schema > revised_chapter_text
+  statement: APPLY output includes revised_chapter_text as the full chapter string.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.change_log_array
+  source_document: io-contract-apply.md
+  source_locator: Output schema > change_log
+  statement: APPLY output includes change_log array.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.change_log_item_id_present
+  source_document: io-contract-apply.md
+  source_locator: Output schema > change_log[].item_id
+  statement: Every change_log entry includes item_id.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.change_log_section_present
+  source_document: io-contract-apply.md
+  source_locator: Output schema > change_log[].section
+  statement: Every change_log entry includes section as a human-locatable name, not a line number.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.change_log_before_excerpt_present
+  source_document: io-contract-apply.md
+  source_locator: Output schema > change_log[].before_excerpt
+  statement: Every change_log entry includes before_excerpt.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.change_log_after_excerpt_present
+  source_document: io-contract-apply.md
+  source_locator: Output schema > change_log[].after_excerpt
+  statement: Every change_log entry includes after_excerpt.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.deviations_from_review_wording_array
+  source_document: io-contract-apply.md
+  source_locator: Output schema > deviations_from_review_wording
+  statement: APPLY output includes deviations_from_review_wording array.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.deviation_item_id_present
+  source_document: io-contract-apply.md
+  source_locator: Output schema > deviations_from_review_wording[].item_id
+  statement: Every deviations_from_review_wording entry includes item_id.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.deviation_reason_present
+  source_document: io-contract-apply.md
+  source_locator: Output schema > deviations_from_review_wording[].reason
+  statement: Every deviations_from_review_wording entry includes reason.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.hard_constraint_self_check.no_cross_reference_invalidated
+  source_document: io-contract-apply.md
+  source_locator: Output schema > hard_constraint_self_check.no_cross_reference_invalidated
+  statement: hard_constraint_self_check includes no_cross_reference_invalidated boolean.
+  classification: STRUCTURAL
+  classification_rationale: Boolean sub-field presence and value check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.hard_constraint_self_check.no_section_reordered_added_removed
+  source_document: io-contract-apply.md
+  source_locator: Output schema > hard_constraint_self_check.no_section_reordered_added_removed
+  statement: hard_constraint_self_check includes no_section_reordered_added_removed boolean.
+  classification: STRUCTURAL
+  classification_rationale: Boolean sub-field presence and value check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.hard_constraint_self_check.no_protected_passage_diluted
+  source_document: io-contract-apply.md
+  source_locator: Output schema > hard_constraint_self_check.no_protected_passage_diluted
+  statement: hard_constraint_self_check includes no_protected_passage_diluted boolean.
+  classification: STRUCTURAL
+  classification_rationale: Boolean sub-field presence and value check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.hard_constraint_self_check.no_code_block_changed
+  source_document: io-contract-apply.md
+  source_locator: Output schema > hard_constraint_self_check.no_code_block_changed
+  statement: hard_constraint_self_check includes no_code_block_changed boolean.
+  classification: STRUCTURAL
+  classification_rationale: Boolean sub-field presence and value check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.hard_constraint_self_check_notes_populated_on_failure
+  source_document: io-contract-apply.md
+  source_locator: Output schema > hard_constraint_self_check.notes
+  statement: notes is non-empty whenever any of the four boolean flags is false.
+  classification: STRUCTURAL
+  classification_rationale: Direct boolean-implies-string-nonempty check against fixture output.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.input_errors_array
+  source_document: io-contract-apply.md
+  source_locator: Output schema > input_errors
+  statement: APPLY output includes input_errors array.
+  classification: STRUCTURAL
+  classification_rationale: Field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.input_error_item_id_present
+  source_document: io-contract-apply.md
+  source_locator: Output schema > input_errors[].item_id
+  statement: Every input_errors entry includes item_id.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: io_apply.output.input_error_problem_present
+  source_document: io-contract-apply.md
+  source_locator: Output schema > input_errors[].problem
+  statement: Every input_errors entry includes problem.
+  classification: STRUCTURAL
+  classification_rationale: Per-element field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.purpose.langgraph_sequences_agent
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 1, Purpose
+  statement: The orchestrator is a LangGraph state graph sequencing EVALUATE and APPLY agent calls.
+  classification: STRUCTURAL
+  classification_rationale: Graph topology and node presence are deterministic assertions.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.purpose.three_pass_cap
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 1, Purpose
+  statement: The orchestrator enforces a 3-pass cap via max_passes fixed at 3.
+  classification: STRUCTURAL
+  classification_rationale: max_passes value and refusal behavior are deterministic state checks.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.purpose.two_human_gates_per_pass
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 1, Purpose
+  statement: Each pass inserts two mandatory human go/no-go gates (evaluate gate and apply gate).
+  classification: STRUCTURAL
+  classification_rationale: Graph must include both gate nodes and pause behavior per pass.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.purpose.agent_holds_no_sequencing
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 1, Purpose
+  statement: The orchestrator holds all sequencing and state logic; the agent holds none.
+  classification: JUDGMENT
+  classification_rationale: Division of responsibilities is architectural and verified by design review more than a single
+    assertion.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.repo.github_read_only_default_branch
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 2, Repository assumptions
+  statement: The orchestrator GitHub credential is read-only against the default branch.
+  classification: STRUCTURAL
+  classification_rationale: Token scope configuration is an injectable dependency assertion in tests.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.repo.branch_protection_required
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 2, Repository assumptions
+  statement: Branch protection requiring PR review before merge supplements read-only token scope.
+  classification: STRUCTURAL
+  classification_rationale: Documented enforcement assumption verifiable via configuration stub.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.repo.apply_pushes_new_branch_naming
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 2, Repository assumptions
+  statement: Every APPLY result is pushed to a new branch named chapter-<chapter_id>-pass-<pass_number>.
+  classification: STRUCTURAL
+  classification_rationale: Branch name pattern is an equality check on GitHub client calls.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.repo.never_push_default_branch
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 2, Repository assumptions
+  statement: The orchestrator never pushes to the default branch under any condition.
+  classification: STRUCTURAL
+  classification_rationale: Absence of default-branch push calls is verifiable from GitHub client mock.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.repo.pr_body_includes_outputs
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 2, Repository assumptions
+  statement: The PR body contains post-edit summary, scope-integrity confirmation, and convergence assessment verbatim from
+    outputs.
+  classification: STRUCTURAL
+  classification_rationale: PR body substring presence is checkable from fixture outputs.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.state.chapter_id
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 3, State schema
+  statement: GraphState includes chapter_id.
+  classification: STRUCTURAL
+  classification_rationale: State key presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.state.pass_number
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 3, State schema
+  statement: GraphState includes pass_number.
+  classification: STRUCTURAL
+  classification_rationale: State key presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.state.max_passes_fixed_at_three
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 3, State schema > max_passes
+  statement: max_passes is fixed at 3.
+  classification: STRUCTURAL
+  classification_rationale: Initial state value check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.state.chapter_text_working_copy
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 3, State schema > chapter_text
+  statement: chapter_text is an in-memory working copy hydrated read-only from GitHub at pass start and not re-initialized
+    from source after pass 1.
+  classification: STRUCTURAL
+  classification_rationale: State field presence and pass-1-only hydration behavior are scriptable graph assertions.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.state.prior_rounds_summary
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 3, State schema
+  statement: GraphState includes prior_rounds_summary (empty on pass 1).
+  classification: STRUCTURAL
+  classification_rationale: State key presence and initial empty list check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.state.last_evaluate_result
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 3, State schema
+  statement: GraphState includes last_evaluate_result.
+  classification: STRUCTURAL
+  classification_rationale: State key presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.state.last_apply_result
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 3, State schema
+  statement: GraphState includes last_apply_result.
+  classification: STRUCTURAL
+  classification_rationale: State key presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.state.evaluate_gate_pending
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 3, State schema
+  statement: GraphState includes evaluate_gate_pending.
+  classification: STRUCTURAL
+  classification_rationale: State key presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.state.evaluate_gate_decision
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 3, State schema
+  statement: GraphState includes evaluate_gate_decision with approved/rejected/pending values.
+  classification: STRUCTURAL
+  classification_rationale: State key and enum value check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.state.approved_item_ids
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 3, State schema
+  statement: GraphState includes approved_item_ids populated by partial or full evaluate-gate approval.
+  classification: STRUCTURAL
+  classification_rationale: State key presence and population on approval check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.state.apply_gate_pending
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 3, State schema
+  statement: GraphState includes apply_gate_pending.
+  classification: STRUCTURAL
+  classification_rationale: State key presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.state.apply_gate_decision
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 3, State schema
+  statement: GraphState includes apply_gate_decision with approved/rejected/pending values.
+  classification: STRUCTURAL
+  classification_rationale: State key and enum value check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.state.pr_number
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 3, State schema
+  statement: GraphState includes pr_number for whichever gate has an open PR/issue.
+  classification: STRUCTURAL
+  classification_rationale: State key presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.state.pass_outcome
+  source_document: session-1-orchestrator-spec.md
+  source_locator: State schema addition
+  statement: GraphState includes pass_outcome with in_progress, completed, cap_reached, or abandoned values.
+  classification: STRUCTURAL
+  classification_rationale: State key presence and terminal value check from addendum.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.node.evaluate_builds_evaluate_payload
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 4, evaluate_node
+  statement: evaluate_node calls the agent with an EVALUATE payload per io-contract-evaluate.md.
+  classification: STRUCTURAL
+  classification_rationale: Agent client receives task EVALUATE with contract-shaped payload.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.node.evaluate_gate_posts_github_issue
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 4, evaluate_gate_node
+  statement: evaluate_gate_node posts the EVALUATE result as a GitHub issue and pauses the graph.
+  classification: STRUCTURAL
+  classification_rationale: GitHub issue creation and graph interrupt are deterministic.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.node.evaluate_gate_one_issue_per_pass
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 4, evaluate_gate_node
+  statement: evaluate_gate_node creates one issue per pass, not a PR (no code diff yet).
+  classification: STRUCTURAL
+  classification_rationale: Issue-not-PR assertion per pass is checkable from GitHub mock.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.node.evaluate_gate_parseable_comment_format
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 4, evaluate_gate_node
+  statement: Author decisions are read from comments matching a fixed machine-parseable format.
+  classification: STRUCTURAL
+  classification_rationale: parse_gate_comment handles approve/reject patterns without NL interpretation.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.node.apply_only_approved_items
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 4, apply_node
+  statement: apply_node calls the agent with only approved_item_ids from the prior gate.
+  classification: STRUCTURAL
+  classification_rationale: APPLY payload item set matches approved_item_ids.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.node.apply_gate_pushes_branch_opens_pr
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 4, apply_gate_node
+  statement: apply_gate_node pushes a branch, opens a PR with diff and post-edit summary, and pauses.
+  classification: STRUCTURAL
+  classification_rationale: GitHub branch/PR operations and graph interrupt are deterministic.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.node.apply_gate_reads_merge_or_close
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 4, apply_gate_node
+  statement: apply_gate_node reads merge (approved) or close-without-merge (rejected) as the decision.
+  classification: STRUCTURAL
+  classification_rationale: Decision mapping from PR state is a fixed routing rule.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.gate.evaluate_gate_always_reached
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 5, conditional edges, first bullet
+  statement: evaluate_node always transitions to evaluate_gate_node; no path bypasses this gate for any EVALUATE outcome,
+    regardless of severity.
+  classification: STRUCTURAL
+  classification_rationale: Graph-edge assertion — deterministic given any EVALUATE output fixture, including a trivial all-LOW-priority
+    one.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.gate.evaluate_to_apply_on_approval
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 5, conditional edges
+  statement: evaluate_gate_node transitions to apply_node on approval.
+  classification: STRUCTURAL
+  classification_rationale: Graph routing on approved decision is deterministic.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.gate.evaluate_partial_approval_subset
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 5, conditional edges
+  statement: Partial approval populates approved_item_ids as a subset of APPLY-eligible items.
+  classification: STRUCTURAL
+  classification_rationale: approved_item_ids length and membership check against fixture evaluate output.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.gate.evaluate_rejection_rewait_no_pass_increment
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 5, conditional edges
+  statement: evaluate_gate_node re-waits on rejection with revision notes without auto-advancing pass_number.
+  classification: STRUCTURAL
+  classification_rationale: pass_number unchanged and gate re-entered on reject is a state assertion.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.gate.apply_to_apply_gate_always
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 5, conditional edges
+  statement: apply_node always transitions to apply_gate_node.
+  classification: STRUCTURAL
+  classification_rationale: Graph-edge assertion.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.gate.apply_gate_to_next_pass_on_merge
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 5, conditional edges
+  statement: apply_gate_node transitions to next pass evaluate_node on merge/approval, incrementing pass_number.
+  classification: STRUCTURAL
+  classification_rationale: pass_number increment on approved merge is a state assertion.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.gate.apply_gate_to_end_on_max_passes_or_converge
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 5, conditional edges
+  statement: apply_gate_node transitions to END on hitting max_passes or on author-declared early convergence.
+  classification: STRUCTURAL
+  classification_rationale: Terminal routing on cap or converge keyword is deterministic.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.pass_cap.fourth_evaluate_refused
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 5, conditional edges, last bullet
+  statement: A 4th evaluate_node call is refused once pass_number > max_passes (fixed at 3).
+  classification: STRUCTURAL
+  classification_rationale: Graph-state assertion against a scripted 4-pass scenario — deterministic pass/fail.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.apply_gate_rewait_on_rejection
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Resolution 2 — Apply-gate rejection routing
+  statement: apply_gate_node re-waits on rejection so the operator can push a fixup commit to the same branch.
+  classification: STRUCTURAL
+  classification_rationale: Graph loops to apply_gate_node on rejected decision without terminating.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.apply_gate_abandon_keyword
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Resolution 2 > abandon bullet
+  statement: A parseable comment keyword abandon permanently ends a pass, distinct from converge.
+  classification: STRUCTURAL
+  classification_rationale: parse_gate_comment recognizes abandon as a terminal keyword.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.apply_gate_abandon_to_end
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Resolution 2 > abandon bullet
+  statement: apply_gate_node transitions to END on abandon.
+  classification: STRUCTURAL
+  classification_rationale: Graph routing on abandon is deterministic.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.apply_gate_abandon_sets_pass_outcome_abandoned
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Resolution 2 > abandon bullet
+  statement: Abandon records pass_outcome abandoned rather than completed or cap_reached.
+  classification: STRUCTURAL
+  classification_rationale: Terminal state field value check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.parse_gate_comment_abandon_terminal
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Resolution 2 > parse_gate_comment
+  statement: parse_gate_comment recognizes abandon at the apply gate as a terminal decision like converge.
+  classification: STRUCTURAL
+  classification_rationale: Parser output for abandon comment is a fixed expected value.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.abandon_apply_gate_only
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Resolution 2 (closing paragraph)
+  statement: abandon applies at the apply gate only; evaluate gate has no abandon path.
+  classification: STRUCTURAL
+  classification_rationale: Parser/graph accepts abandon only at apply gate in fixture tests.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.apply_node_reconstructs_from_last_evaluate
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Resolution 3
+  statement: apply_node reconstructs full approved_items objects from last_evaluate_result using approved_item_ids.
+  classification: STRUCTURAL
+  classification_rationale: APPLY payload objects match lookup from last_evaluate_result by id.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.apply_node_agent_identified_no_special_case
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Resolution 1
+  statement: apply_node reconstructs agent-identified APPLY items from last_evaluate_result the same way as supplied-review
+    items.
+  classification: STRUCTURAL
+  classification_rationale: Payload reconstruction treats both origins identically in fixture test.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.checkpoint.paused_graph_persists
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 6, Checkpointing
+  statement: A paused graph at either gate persists state via LangGraph checkpointer.
+  classification: STRUCTURAL
+  classification_rationale: Checkpointer write on interrupt is verifiable in tests.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.checkpoint.resume_without_rerun
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 6, Checkpointing
+  statement: Resuming does not re-run the EVALUATE or APPLY call already awaiting approval.
+  classification: STRUCTURAL
+  classification_rationale: Agent call count unchanged across resume is a deterministic assertion.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.deps.injectable_clients
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 7, Injectable dependencies
+  statement: Agent calls and GitHub operations use injectable client interfaces, not hardcoded inside node logic.
+  classification: STRUCTURAL
+  classification_rationale: Dependency injection points exist and are used in node factories.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: orchestrator.persistence_gate.hard_constraint_failure_blocks_mergeable_pr
+  source_document: session-1-orchestrator-spec.md
+  source_locator: Section 8, Persistence gate
+  statement: If any hard_constraint_self_check flag is false, apply_gate_node does not open a mergeable PR.
+  classification: STRUCTURAL
+  classification_rationale: PR opened as draft or failure state when any self-check boolean is false.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: dependency_contract.api.check_all_signature
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 1, Input shape
+  statement: check_all accepts docs dict mapping canonical filenames to raw file text and returns list[CheckResult].
+  classification: STRUCTURAL
+  classification_rationale: Function signature and return type are import-time/API checks.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: dependency_contract.api.check_all_from_dir
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 1, Input shape
+  statement: check_all_from_dir reads six conventional filenames from a directory and calls check_all.
+  classification: STRUCTURAL
+  classification_rationale: Wrapper reads expected filenames and delegates — verifiable in Session 2 tests.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: dependency_contract.output.CheckResult_fields
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 2, Output shape
+  statement: Each CheckResult includes assumption_id, passed, expected, found, and detail.
+  classification: STRUCTURAL
+  classification_rationale: Dataclass field presence check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: dependency_contract.output.check_all_never_short_circuits
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 2, Output shape
+  statement: check_all runs every checker and returns the full result list even if earlier checks failed.
+  classification: STRUCTURAL
+  classification_rationale: Result count equals checker count regardless of failures.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: dependency_contract.defect_category_count_self_referential
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 3, defect_category_count row
+  statement: The checker's expected count is derived from editorial-review-process.md's own number-word claim, not a hardcoded
+    constant, and fails explicitly (not silently) when that claim can't be located.
+  classification: STRUCTURAL
+  classification_rationale: Already mechanically verified by Session 2's own test suite; this entry exists so Session 4/traceability
+    knows the coverage already exists upstream and doesn't need re-testing here.
+  covering_test_scenario_ids: []
+  notes: Cross-reference only — actual test lives in session-2-dependency-contract/tests/, not duplicated here.
+- requirement_id: dependency_contract.checklist_question_count
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 3, checklist_question_count row
+  statement: checklist_question_count derives expected from playbook's seven-question phrase and compares to addendum heading
+    count.
+  classification: STRUCTURAL
+  classification_rationale: Number-word-derived expectation and heading count — Session 2 mechanical check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: dependency_contract.evaluate_dimension_count
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 3, evaluate_dimension_count row
+  statement: evaluate_dimension_count derives expected from playbook's seven dimensions phrase and compares to editorial-review-process.md
+    Phase 1 list count.
+  classification: STRUCTURAL
+  classification_rationale: Number-word-derived expectation and list count — Session 2 mechanical check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: dependency_contract.hard_constraint_count
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 3, hard_constraint_count row
+  statement: hard_constraint_count expects exactly five bold-labeled bullets under Hard Constraints in the playbook.
+  classification: STRUCTURAL
+  classification_rationale: Fixed count of five bold bullets — Session 2 mechanical check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: dependency_contract.protected_callout_names_present
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 3, protected_callout_names_present row
+  statement: protected_callout_names_present verifies three keyword-presence pairs across process doc and style-guide.
+  classification: STRUCTURAL
+  classification_rationale: Keyword co-occurrence checks — Session 2 mechanical check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: dependency_contract.recommendation_scale_consistency
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 3, recommendation_scale_consistency row
+  statement: recommendation_scale_consistency normalizes and compares 5-way vocabulary across playbook, process doc, and addendum
+    with prefix-match allowance for RESOLVED AS SIDE EFFECT.
+  classification: STRUCTURAL
+  classification_rationale: Token extraction and set comparison — Session 2 mechanical check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: dependency_contract.closing_bridge_convention_defined
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 3, closing_bridge_convention_defined row
+  statement: closing_bridge_convention_defined verifies heading and never-a-chapter-number phrase in editorial-review-process.md.
+  classification: STRUCTURAL
+  classification_rationale: Heading and phrase presence — Session 2 mechanical check.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: dependency_contract.scope.pass_cap_out_of_document_set
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 0, Scope note item 1
+  statement: The 3-pass cap is not mechanically checkable within the six governing documents this checker was scoped to.
+  classification: STRUCTURAL
+  classification_rationale: Documented negative scope — verified by absence of pass-cap checker in Session 2 implementation.
+  covering_test_scenario_ids: []
+  notes: Open Question Q1 — pass cap checked in orchestrator spec instead.
+- requirement_id: dependency_contract.scope.hard_constraint_provenance_not_automatable
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 4, Not automatable table
+  statement: Hard Constraints' near-verbatim match to a specific source document is not mechanically checkable because the
+    playbook does not cite per-constraint provenance.
+  classification: JUDGMENT
+  classification_rationale: Listed explicitly as not automatable — no mechanical test can settle semantic equivalence.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: dependency_contract.scope.defect_category_description_accuracy
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 4, Not automatable table
+  statement: Whether each defect-category description remains accurate prose is not mechanically checkable.
+  classification: JUDGMENT
+  classification_rationale: Requires re-reading chapter text — listed as not automatable.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: dependency_contract.scope.checklist_substance_coherence
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 4, Not automatable table
+  statement: Whether the seven checklist questions' substance is coherent together is not mechanically checkable.
+  classification: JUDGMENT
+  classification_rationale: Requires reading comprehension — listed as not automatable.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: dependency_contract.scope.book_spine_alignment_precedent
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 4, Not automatable table
+  statement: Book spine alignment against cited precedent is not mechanically checkable from static documents alone.
+  classification: JUDGMENT
+  classification_rationale: Requires checking actual chapter files — listed as not automatable.
+  covering_test_scenario_ids: []
+  notes: null
+- requirement_id: dependency_contract.scope.protected_callout_semantic_equivalence
+  source_document: session-2-dependency-contract/spec.md
+  source_locator: Section 4, Not automatable table
+  statement: Keyword hits for protected callouts do not prove semantic equivalence between documents.
+  classification: JUDGMENT
+  classification_rationale: Deeper equivalence behind keyword hits is explicitly not automatable.
+  covering_test_scenario_ids: []
+  notes: null
