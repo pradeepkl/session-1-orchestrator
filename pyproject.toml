@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "session-1-orchestrator"
+version = "0.1.0"
+description = "LangGraph orchestrator for chapter judgment EVALUATE/APPLY workflow"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "langgraph==1.2.7",
+    "pydantic>=2.0,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0,<9",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
