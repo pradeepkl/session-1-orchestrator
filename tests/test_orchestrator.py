@@ -670,6 +670,34 @@ def test_parse_abandon_recognized_at_apply_gate():
     assert parsed.decision == "abandoned"
 
 
+def test_abandon_at_evaluate_gate_is_no_op():
+    evaluate = sample_evaluate_output()
+    agent = StubAgentClient(evaluate_response=evaluate)
+    eligible = apply_eligible_item_ids(evaluate)
+    github = StubGitHubClient(
+        issue_comment="abandon",
+        apply_eligible_ids=eligible,
+    )
+    graph = make_graph(agent, github)
+    config = thread_config("t-eval-abandon-noop")
+
+    graph.invoke(initial_state("ch-1", chapter_text="Chapter."), config)
+    pass_before = graph.get_state(config).values["pass_number"]
+    evaluate_calls_before = agent.count("evaluate")
+
+    graph.invoke(None, config)
+
+    state = graph.get_state(config)
+    assert state.values["pass_number"] == pass_before
+    assert agent.count("evaluate") == evaluate_calls_before
+    assert agent.count("apply") == 0
+    assert state.values["evaluate_gate_pending"] is True
+    assert state.values["evaluate_gate_decision"] == "pending"
+    assert state.values.get("pass_outcome") is None
+    assert state.values.get("termination_reason") is None
+    assert state.next == ("evaluate_gate_node",)
+
+
 def test_apply_gate_rejection_then_abandon_routes_to_end():
     agent = StubAgentClient(
         evaluate_response=sample_evaluate_output(),
