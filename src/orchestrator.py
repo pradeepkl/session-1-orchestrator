@@ -188,7 +188,7 @@ class GraphState(TypedDict, total=False):
     last_evaluate_result: EvaluateOutput | None
     last_apply_result: ApplyOutput | None
     evaluate_gate_pending: bool
-    evaluate_gate_decision: Literal["approved", "rejected", "pending", "converged"]
+    evaluate_gate_decision: Literal["approved", "rejected", "pending", "converged", "abandoned"]
     approved_item_ids: list[str]
     apply_gate_pending: bool
     apply_gate_decision: Literal["approved", "rejected", "pending", "converged", "abandoned"]
@@ -558,11 +558,15 @@ def make_evaluate_gate_node(deps: OrchestratorDeps):
             issue_number = deps.github.open_issue(title, body)
 
         decision = deps.github.read_issue_decision(issue_number)
+        gate_decision = decision.decision
+        # Apply-gate-only terminal keywords are no-ops at the evaluate gate (Addendum 1).
+        if gate_decision in ("abandoned", "converged"):
+            gate_decision = "pending"
 
         return {
             "pr_number": issue_number,
-            "evaluate_gate_decision": decision.decision,
-            "evaluate_gate_pending": decision.decision == "pending",
+            "evaluate_gate_decision": gate_decision,
+            "evaluate_gate_pending": gate_decision == "pending",
             "approved_item_ids": decision.approved_item_ids,
         }
 
